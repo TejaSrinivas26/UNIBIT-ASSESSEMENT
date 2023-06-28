@@ -1,0 +1,31 @@
+def find_sum_pairs(arr, target):
+    complements = {}
+    result = []
+    
+    for num in arr:
+        complement = target - num
+        if complement in complements:
+            result.append([num, complement])
+        complements[num] = complement
+    
+    merged_array = sorted([num for pair in result for num in pair])
+    
+    return result, merged_array
+
+def find_double_combinations(arr, target):
+    double_target = target * 2
+    double_result, double_merged_array = find_sum_pairs(arr, double_target)
+    return double_result, double_merged_array
+
+# Sample input
+arr = [1, 3, 2, 2, -4, -6, -2, 8]
+target = 4
+
+# Find combinations for target value
+result, merged_array = find_sum_pairs(arr, target)
+print("First Combination For {}:".format(target), result)
+print("Merge Into a single Array:", merged_array)
+
+# Find combinations for double target value
+double_result, double_merged_array = find_double_combinations(arr, target)
+print("Second Combination For {}:".format(target * 2), double_result)
